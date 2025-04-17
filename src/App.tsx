@@ -1,37 +1,52 @@
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Error from "./pages/Error/Error";
+
 import "./App.css";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+
 function App({ q = "LandingPage" }: { q: string }) {
   let [page, setPage] = useState(q);
   let [isLoggedIn, setIsLoggedIn] = useState(false);
-  let log = localStorage.getItem("isLoggedIn");
-  console.log(log);
+
+  console.log(localStorage.getItem("isLoggedIn"));
+
+  useEffect(() => {
+    const log = localStorage.getItem("isLoggedIn");
+    if (log === "true") setPage("Dashboard");
+  }, []);
+
   function updateIsLoggedIn(value: boolean) {
-    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isLoggedIn", value.toString());
     setIsLoggedIn(value);
+    if (isLoggedIn === false) {
+      setPage("LandingPage");
+    }
   }
-  function updateState(value: any) {
+  function updateState(value: string) {
     setPage(value);
   }
 
   return (
-    <DefaultPage
-      p={isLoggedIn ? "DashBoard" : page}
-      updatePage={updateState}
-      updateIsLoggedIn={updateIsLoggedIn}
-    ></DefaultPage>
+    <div id="appDiv">
+      <DefaultPage
+        page={isLoggedIn ? "Dashboard" : page}
+        updatePage={updateState}
+        updateIsLoggedIn={updateIsLoggedIn}
+      ></DefaultPage>
+    </div>
   );
 }
 
 function DefaultPage({
-  p,
+  page: p,
   updatePage,
   updateIsLoggedIn,
 }: {
-  p: any;
-  updatePage: any;
-  updateIsLoggedIn: any;
+  page: string;
+  updatePage: Function;
+  updateIsLoggedIn: Function;
 }) {
   switch (p) {
     case "LandingPage":
@@ -41,21 +56,10 @@ function DefaultPage({
           updateIsLoggedIn={updateIsLoggedIn}
         ></LandingPage>
       );
-    case "DashBoard":
-      return <Dashboard></Dashboard>;
+    case "Dashboard":
+      return <Dashboard updateIsLoggedIn={updateIsLoggedIn}></Dashboard>;
     default:
-      console.log("Error");
-  }
-  if (p === "LandingPage") {
-    return (
-      <LandingPage
-        updatePage={updatePage}
-        updateIsLoggedIn={updateIsLoggedIn}
-      ></LandingPage>
-    );
-  }
-  if (p === "Dashboard") {
-    return <Dashboard></Dashboard>;
+      return <Error></Error>;
   }
 }
 

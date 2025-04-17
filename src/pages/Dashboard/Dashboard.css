@@ -1,13 +1,83 @@
 #parent {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
 }
 #navBar {
   display: flex;
-  padding: 10px;
   width: 100%;
   background-color: antiquewhite;
   justify-content: space-between;
   align-items: center;
+}
+#body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+#user {
+  display: flex;
+  border: 0px;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 100%;
+  justify-self: center;
+  align-items: center;
+  color: aliceblue;
+  background-color: rgb(201, 174, 174);
+}
+#user:hover {
+  background-color: gray;
+}
+#userInfo {
+  display: flex;
+}
+#navChildren {
+  margin-left: 0.9rem;
+  margin-right: 0.9rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#children {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+#navigation {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+#dropDownMenu {
+  background-color: antiquewhite;
+  align-items: center;
+  flex-direction: column-reverse;
+  width: 35%;
+  height: 99%;
+  border-radius: 10px;
+  margin-right: 0.625rem;
+}
+#logoutBtn {
+  border-radius: 10px;
+  height: 5%;
+  width: 30%;
+}
+
+#logoutBtn:hover {
+  background-color: gray;
 }
